@@ -24,29 +24,29 @@ namespace Sync2Example
 
             foreach (var schema in schemas)
             {
-                var dt = new DataTable();
+                var dataTable = new DataTable();
+                var dynamicEntities = data.Where(d => d.ProjectTableName == schema.ProjectTableName);
+
                 foreach (var column in schema.Columns.Values)
                 {
-                    dt.Columns.Add(column.Name, column.DataType);
-
+                    dataTable.Columns.Add(column.Name, column.DataType);
                 }
-                var tableItems = data.Where(d => d.ProjectTableName == schema.ProjectTableName);
-                foreach (var item in tableItems)
+                foreach (var dynamicEntity in dynamicEntities)
                 {
-                    var row = dt.NewRow();
-                    foreach (var stuff in item.Data)
+                    var row = dataTable.NewRow();
+                    foreach (var cell in dynamicEntity.Data)
                     {
-                        if (row.Table.Columns.Contains(stuff.Key))
+                        if (row.Table.Columns.Contains(cell.Key))
                         {
-                            row[stuff.Key] = stuff.Value ?? DBNull.Value;
+                            row[cell.Key] = cell.Value ?? DBNull.Value;
                         }
                     }
-                    dt.Rows.Add(row);
+                    dataTable.Rows.Add(row);
                 }
 
 
                 var grid = new DataGridView();
-                grid.DataSource = dt;
+                grid.DataSource = dataTable;
                 grid.Dock = DockStyle.Fill;
                 var tabPage = new TabPage(schema.ProjectTableName);
                 tabPage.Controls.Add(grid);
