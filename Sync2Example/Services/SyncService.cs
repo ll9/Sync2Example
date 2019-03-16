@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AutoMapper;
+using Newtonsoft.Json;
 using RestSharp;
+using Sync2Example.AutoMapper.Profiles;
+using Sync2Example.DTOs;
 using Sync2Example.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +15,12 @@ namespace Sync2Example.Services
     public class SyncService
     {
         private RestClient _client;
+        private IMapper _mapper;
 
         public SyncService()
         {
             _client = new RestClient("https://localhost:44305/");
+            _mapper = new Mapper(new MapperConfiguration(config => config.AddProfile(new MappingProfile())));
         }
 
         public ICollection<SchemaDefinition> PullSchemas()
@@ -28,7 +33,8 @@ namespace Sync2Example.Services
 
             if (response.IsSuccessful)
             {
-                return JsonConvert.DeserializeObject<List<SchemaDefinition>>(response.Content);
+                var dtos = JsonConvert.DeserializeObject<List<SchemaDefinitionDTO>>(response.Content);
+                return _mapper.Map<ICollection<SchemaDefinition>>(dtos);
             }
             return null;
         }
@@ -43,7 +49,8 @@ namespace Sync2Example.Services
 
             if (response.IsSuccessful)
             {
-                return JsonConvert.DeserializeObject<List<DynamicEntity>>(response.Content);
+                var dtos = JsonConvert.DeserializeObject<List<DynamicEntityDTO>>(response.Content);
+                return _mapper.Map<ICollection<DynamicEntity>>(dtos);
             }
             return null;
         }
