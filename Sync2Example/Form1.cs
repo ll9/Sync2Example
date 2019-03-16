@@ -56,6 +56,7 @@ namespace Sync2Example
 
 
                 var grid = new DataGridView();
+                grid.ReadOnly = true;
                 grid.DataSource = dataTable;
                 grid.Dock = DockStyle.Fill;
                 var tabPage = new TabPage(schema.ProjectTableName);
