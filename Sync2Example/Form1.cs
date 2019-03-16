@@ -1,4 +1,5 @@
-﻿using Sync2Example.Services;
+﻿using Sync2Example.Models;
+using Sync2Example.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,10 +28,15 @@ namespace Sync2Example
                 var dataTable = new DataTable();
                 var dynamicEntities = data.Where(d => d.ProjectTableName == schema.ProjectTableName);
 
+                dataTable.Columns.Add(nameof(DynamicEntity.Id), typeof(string));
+                dataTable.Columns.Add(nameof(DynamicEntity.IsDeleted), typeof(bool));
+                dataTable.Columns.Add(nameof(DynamicEntity.SyncStatus), typeof(bool));
+                dataTable.Columns.Add(nameof(DynamicEntity.RowVersion), typeof(int));
                 foreach (var column in schema.Columns.Values)
                 {
                     dataTable.Columns.Add(column.Name, column.DataType);
                 }
+
                 foreach (var dynamicEntity in dynamicEntities)
                 {
                     var row = dataTable.NewRow();
@@ -41,6 +47,10 @@ namespace Sync2Example
                             row[cell.Key] = cell.Value ?? DBNull.Value;
                         }
                     }
+                    row[nameof(DynamicEntity.Id)] = dynamicEntity.Id;
+                    row[nameof(DynamicEntity.IsDeleted)] = dynamicEntity.IsDeleted;
+                    row[nameof(DynamicEntity.SyncStatus)] = dynamicEntity.SyncStatus;
+                    row[nameof(DynamicEntity.RowVersion)] = dynamicEntity.RowVersion;
                     dataTable.Rows.Add(row);
                 }
 
