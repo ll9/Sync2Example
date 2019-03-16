@@ -28,7 +28,7 @@ namespace Sync2Example.Views
 
         private void ChooseButton_Click(object sender, EventArgs e)
         {
-            var controller = new DataController(ViewModel.SelectedSchemaDefinition.ProjectTableName, ViewModel.SelectedSchemaDefinition.ProjectTable.ProjectId);
+            var controller = new DataController(ViewModel.SelectedSchemaDefinition);
             controller.ShowDialog();
         }
     }

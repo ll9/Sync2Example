@@ -16,17 +16,25 @@ namespace Sync2Example.Controllers
         private DataDialog _view;
         private IEnumerable<DynamicEntity> _filteredData;
 
-        public DataController(string projectTableName, string projectId)
+        public DataController(SchemaDefinition schemaDefinition)
         {
             var syncService = new SyncService();
             var data = syncService.PullData();
-            _filteredData = data.Where(d => d.ProjectTable.ProjectId == projectId && d.ProjectTableName == projectTableName);
+            _filteredData = data.Where(d => d.ProjectTable.ProjectId == schemaDefinition.ProjectTable.ProjectId && d.ProjectTableName == schemaDefinition.ProjectTableName);
         }
 
         public DialogResult ShowDialog()
         {
-            _view = new DataDialog(_filteredData.ToList());
+            _view = new DataDialog(this, _filteredData.ToList());
             return _view.ShowDialog();
+        }
+
+        internal void DeleteEntity(DynamicEntity selectedDynamicEntity)
+        {
+            selectedDynamicEntity.IsDeleted = true;
+            selectedDynamicEntity.SyncStatus = false;
+
+            MessageBox.Show("Should sync entity " + selectedDynamicEntity.Id);
         }
     }
 }
