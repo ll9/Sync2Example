@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sync2Example.Models;
+using Sync2Example.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,15 @@ namespace Sync2Example.Views
 {
     public partial class SchemaDialog : Form
     {
-        public SchemaDialog()
+        public SchemaDialog(ICollection<SchemaDefinition> schemaDefinitions)
         {
             InitializeComponent();
+
+            ViewModel = new SchemaListViewModel { SchemaDefinitions = schemaDefinitions };
+            BindingSource.DataSource = ViewModel;
+
         }
+
+        public SchemaListViewModel ViewModel { get; }
     }
 }

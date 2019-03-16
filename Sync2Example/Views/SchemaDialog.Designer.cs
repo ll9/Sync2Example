@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.ChooseButton = new System.Windows.Forms.Button();
+            this.BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
             // 
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.BindingSource, "SchemaDefinitions", true));
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.BindingSource, "SelectedSchemaDefinition", true));
+            this.listBox1.DisplayMember = "Id";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(12, 12);
             this.listBox1.Name = "listBox1";
@@ -49,6 +55,10 @@
             this.ChooseButton.Text = "Auswählen";
             this.ChooseButton.UseVisualStyleBackColor = true;
             // 
+            // BindingSource
+            // 
+            this.BindingSource.DataSource = typeof(Sync2Example.ViewModels.SchemaListViewModel);
+            // 
             // SchemaDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -58,6 +68,7 @@
             this.Controls.Add(this.listBox1);
             this.Name = "SchemaDialog";
             this.Text = "SchemaDialog";
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -66,5 +77,6 @@
 
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button ChooseButton;
+        private System.Windows.Forms.BindingSource BindingSource;
     }
 }

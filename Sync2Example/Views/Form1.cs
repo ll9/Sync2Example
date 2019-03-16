@@ -68,7 +68,10 @@ namespace Sync2Example
 
         private void CRUDButton_Click(object sender, EventArgs e)
         {
-            new SchemaDialog().ShowDialog();
+            var syncService = new SyncService();
+
+            var schemas = syncService.PullSchemas();
+            new SchemaDialog(schemas.ToList()).ShowDialog();
         }
     }
 }
