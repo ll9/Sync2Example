@@ -28,14 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.DataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.DataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
             // 
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.DataBindingSource, "SelectedDynamicEntity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.DataBindingSource, "DynamicEntities", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.listBox1.DisplayMember = "Id";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(13, 13);
             this.listBox1.Name = "listBox1";
@@ -69,6 +75,10 @@
             this.button3.Text = "Löschen";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // DataBindingSource
+            // 
+            this.DataBindingSource.DataSource = typeof(Sync2Example.ViewModels.DataListViewModel);
+            // 
             // DataDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -80,6 +90,7 @@
             this.Controls.Add(this.listBox1);
             this.Name = "DataDialog";
             this.Text = "DataDialog";
+            ((System.ComponentModel.ISupportInitialize)(this.DataBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +101,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.BindingSource DataBindingSource;
     }
 }

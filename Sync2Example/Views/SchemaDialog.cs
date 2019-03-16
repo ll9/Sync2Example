@@ -1,4 +1,5 @@
-﻿using Sync2Example.Models;
+﻿using Sync2Example.Controllers;
+using Sync2Example.Models;
 using Sync2Example.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,11 @@ namespace Sync2Example.Views
         }
 
         public SchemaListViewModel ViewModel { get; }
+
+        private void ChooseButton_Click(object sender, EventArgs e)
+        {
+            var controller = new DataController(ViewModel.SelectedSchemaDefinition.ProjectTableName, ViewModel.SelectedSchemaDefinition.ProjectTable.ProjectId);
+            controller.ShowDialog();
+        }
     }
 }

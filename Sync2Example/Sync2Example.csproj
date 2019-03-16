@@ -63,6 +63,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="DTOs\DynamicEntityDTO.cs" />
     <Compile Include="DTOs\SchemaDefinitionDTO.cs" />
+    <Compile Include="ViewModels\DataListViewModel.cs" />
     <Compile Include="ViewModels\SchemaListViewModel.cs" />
     <Compile Include="Views\DataDialog.cs">
       <SubType>Form</SubType>
@@ -120,6 +121,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Sync2Example.Models.SchemaDefinition.datasource" />
+    <None Include="Properties\DataSources\Sync2Example.ViewModels.DataListViewModel.datasource" />
     <None Include="Properties\DataSources\Sync2Example.ViewModels.SchemaListViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

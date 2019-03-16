@@ -37,8 +37,8 @@
             // 
             // listBox1
             // 
+            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.BindingSource, "SelectedSchemaDefinition", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.BindingSource, "SchemaDefinitions", true));
-            this.listBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.BindingSource, "SelectedSchemaDefinition", true));
             this.listBox1.DisplayMember = "Id";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(12, 12);
@@ -54,6 +54,7 @@
             this.ChooseButton.TabIndex = 1;
             this.ChooseButton.Text = "Auswählen";
             this.ChooseButton.UseVisualStyleBackColor = true;
+            this.ChooseButton.Click += new System.EventHandler(this.ChooseButton_Click);
             // 
             // BindingSource
             // 
