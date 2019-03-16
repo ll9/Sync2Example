@@ -13,6 +13,7 @@ namespace Sync2Example.Controllers
 {
     public class DataController
     {
+        private readonly SchemaDefinition _schemaDefinition;
         private DataDialog _view;
         private IEnumerable<DynamicEntity> _filteredData;
 
@@ -21,11 +22,12 @@ namespace Sync2Example.Controllers
             var syncService = new SyncService();
             var data = syncService.PullData();
             _filteredData = data.Where(d => d.ProjectTable.ProjectId == schemaDefinition.ProjectTable.ProjectId && d.ProjectTableName == schemaDefinition.ProjectTableName);
+            this._schemaDefinition = schemaDefinition;
         }
 
         public DialogResult ShowDialog()
         {
-            _view = new DataDialog(this, _filteredData.ToList());
+            _view = new DataDialog(this, _filteredData.ToList(), _schemaDefinition);
             return _view.ShowDialog();
         }
 

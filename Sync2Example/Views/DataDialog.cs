@@ -1,4 +1,5 @@
 ﻿using Sync2Example.Controllers;
+using Sync2Example.Models;
 using Sync2Example.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,29 @@ namespace Sync2Example.Views
 {
     public partial class DataDialog : Form
     {
-        public DataDialog(DataController dataController, ICollection<Models.DynamicEntity> _filteredData)
+        public DataDialog(DataController dataController, List<DynamicEntity> list, SchemaDefinition schemaDefinition)
         {
             InitializeComponent();
 
             _controller = dataController;
-            ViewModel = new DataListViewModel { DynamicEntities = _filteredData };
+            ViewModel = new DataListViewModel { DynamicEntities = list };
             DataBindingSource.DataSource = ViewModel;
+            _schemaDefinition = schemaDefinition;
         }
 
         private DataController _controller;
+        private SchemaDefinition _schemaDefinition;
 
         public DataListViewModel ViewModel { get; private set; }
 
         private void button3_Click(object sender, EventArgs e)
         {
             _controller.DeleteEntity(ViewModel.SelectedDynamicEntity);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new DataRecordDialog(_schemaDefinition, ViewModel.SelectedDynamicEntity).ShowDialog();
         }
     }
 }
