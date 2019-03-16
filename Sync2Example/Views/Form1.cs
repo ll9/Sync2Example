@@ -1,5 +1,6 @@
 ﻿using Sync2Example.Models;
 using Sync2Example.Services;
+using Sync2Example.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +64,11 @@ namespace Sync2Example
                 tabPage.Controls.Add(grid);
                 GridTabControl.TabPages.Add(tabPage);
             }
+        }
+
+        private void CRUDButton_Click(object sender, EventArgs e)
+        {
+            new SchemaDialog().ShowDialog();
         }
     }
 }
