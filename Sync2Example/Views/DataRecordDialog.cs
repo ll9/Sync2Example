@@ -61,7 +61,7 @@ namespace Sync2Example.Views
                     }
                     else if (column.DataType == typeof(DateTime))
                     {
-                        if (double.TryParse(textBox.Text, out var result))
+                        if (DateTime.TryParse(textBox.Text, out var result))
                         {
                             _entity.Data[column.Name] = result;
                         }

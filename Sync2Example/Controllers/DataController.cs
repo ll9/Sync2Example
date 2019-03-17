@@ -39,5 +39,12 @@ namespace Sync2Example.Controllers
             var syncService = new SyncService();
             syncService.DeleteEntity(selectedDynamicEntity);
         }
+
+        internal void EditEntity(DynamicEntity selectedDynamicEntity)
+        {
+            selectedDynamicEntity.SyncStatus = false;
+            var syncService = new SyncService();
+            syncService.EditEntity(selectedDynamicEntity);
+        }
     }
 }

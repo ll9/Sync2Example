@@ -55,6 +55,24 @@ namespace Sync2Example.Services
             return null;
         }
 
+        internal void EditEntity(DynamicEntity selectedDynamicEntity)
+        {
+            var maxSync = int.MaxValue;
+            var changedDtos = _mapper.Map<ICollection<DynamicEntityDTO>>(new[] { selectedDynamicEntity });
+
+            var request = new RestRequest("api/DynamicEntities/{maxSync}", Method.POST);
+            request.JsonSerializer = new Serializers.JsonSerializer();
+            request.AddUrlSegment("maxSync", maxSync);
+            request.AddJsonBody(changedDtos);
+
+            var response = _client.Execute(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception("Edit failed");
+            }
+        }
+
         internal void DeleteEntity(DynamicEntity selectedDynamicEntity)
         {
             var request = new RestRequest("api/dynamicentities/{id}", Method.DELETE);

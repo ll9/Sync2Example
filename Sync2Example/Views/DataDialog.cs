@@ -35,9 +35,19 @@ namespace Sync2Example.Views
             _controller.DeleteEntity(ViewModel.SelectedDynamicEntity);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
-            new DataRecordDialog(_schemaDefinition, ViewModel.SelectedDynamicEntity).ShowDialog();
+            var dialog = new DataRecordDialog(_schemaDefinition, ViewModel.SelectedDynamicEntity);
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _controller.EditEntity(ViewModel.SelectedDynamicEntity);
+            }
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Create not implemented yet");
         }
     }
 }
