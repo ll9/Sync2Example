@@ -57,6 +57,7 @@
             this.OKButton.TabIndex = 1;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // CANCELButton
             // 
@@ -66,6 +67,7 @@
             this.CANCELButton.TabIndex = 2;
             this.CANCELButton.Text = "Abbrechen";
             this.CANCELButton.UseVisualStyleBackColor = true;
+            this.CANCELButton.Click += new System.EventHandler(this.CANCELButton_Click);
             // 
             // DataRecordDialog
             // 

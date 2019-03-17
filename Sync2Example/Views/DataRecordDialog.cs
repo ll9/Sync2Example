@@ -38,8 +38,20 @@ namespace Sync2Example.Views
                 tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
                 tableLayoutPanel1.Controls.Add(new Label { Text = column.Name }, 0, tableLayoutPanel1.RowCount - 1);
-                tableLayoutPanel1.Controls.Add(new TextBox { Text = _entity.Data[column.Name]?.ToString(), Dock = DockStyle.Fill}, 1, tableLayoutPanel1.RowCount - 1);
+                tableLayoutPanel1.Controls.Add(new TextBox { Text = _entity.Data[column.Name]?.ToString(), Dock = DockStyle.Fill }, 1, tableLayoutPanel1.RowCount - 1);
             }
+        }
+
+        private void OKButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void CANCELButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }
