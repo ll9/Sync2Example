@@ -36,7 +36,8 @@ namespace Sync2Example.Controllers
             selectedDynamicEntity.IsDeleted = true;
             selectedDynamicEntity.SyncStatus = false;
 
-            MessageBox.Show("Should sync entity " + selectedDynamicEntity.Id);
+            var syncService = new SyncService();
+            syncService.DeleteEntity(selectedDynamicEntity);
         }
     }
 }

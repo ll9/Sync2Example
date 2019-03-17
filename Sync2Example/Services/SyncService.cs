@@ -54,5 +54,19 @@ namespace Sync2Example.Services
             }
             return null;
         }
+
+        internal void DeleteEntity(DynamicEntity selectedDynamicEntity)
+        {
+            var request = new RestRequest("api/dynamicentities/{id}", Method.DELETE);
+            request.AddUrlSegment("id", selectedDynamicEntity.Id);
+            request.JsonSerializer = new Serializers.JsonSerializer();
+
+            var response = _client.Execute(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception("Can not delete");
+            }
+        }
     }
 }
