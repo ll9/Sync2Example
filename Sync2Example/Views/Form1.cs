@@ -32,7 +32,7 @@ namespace Sync2Example
                 dataTable.Columns.Add(nameof(DynamicEntity.Id), typeof(string));
                 dataTable.Columns.Add(nameof(DynamicEntity.IsDeleted), typeof(bool));
                 dataTable.Columns.Add(nameof(DynamicEntity.SyncStatus), typeof(bool));
-                dataTable.Columns.Add(nameof(DynamicEntity.RowVersion), typeof(int));
+                dataTable.Columns.Add(nameof(DynamicEntity.RowVersion), typeof(long));
                 foreach (var column in schema.Columns.Values)
                 {
                     dataTable.Columns.Add(column.Name, column.DataType);
@@ -45,7 +45,14 @@ namespace Sync2Example
                     {
                         if (row.Table.Columns.Contains(cell.Key))
                         {
-                            row[cell.Key] = cell.Value ?? DBNull.Value;
+                            if (row.Table.Columns[cell.Key].DataType == cell.Value?.GetType())
+                            {
+                                row[cell.Key] = cell.Value ?? DBNull.Value;
+                            }
+                            else
+                            {
+                                row[cell.Key] = DBNull.Value;
+                            }
                         }
                     }
                     row[nameof(DynamicEntity.Id)] = dynamicEntity.Id;
