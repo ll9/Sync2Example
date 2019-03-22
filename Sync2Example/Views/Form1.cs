@@ -18,10 +18,15 @@ namespace Sync2Example
         public Form1()
         {
             InitializeComponent();
+            Init();
+        }
 
+        private void Init()
+        {
+            GridTabControl.TabPages.Clear();
             var syncService = new SyncService();
 
-            var schemas = syncService.PullSchemas();
+            var schemas = syncService.PullSchemas().Where(s => s.IsDeleted == false);
             var data = syncService.PullData();
 
             foreach (var schema in schemas)
@@ -79,6 +84,11 @@ namespace Sync2Example
 
             var schemas = syncService.PullSchemas();
             new SchemaDialog(schemas.ToList()).ShowDialog();
+        }
+
+        private void ReloadButton_Click(object sender, EventArgs e)
+        {
+            Init();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,5 +19,8 @@ namespace Sync2Example.Models
         public bool SyncStatus { get; set; } = false;
         public bool IsDeleted { get; set; } = false;
         public int RowVersion { get; set; } = 0;
+
+        [JsonIgnore]
+        public string ProjectTableNameWithId => $"{ProjectTableName} {Id}";
     }
 }

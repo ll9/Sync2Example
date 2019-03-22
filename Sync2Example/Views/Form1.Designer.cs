@@ -30,6 +30,7 @@
         {
             this.GridTabControl = new System.Windows.Forms.TabControl();
             this.CRUDButton = new System.Windows.Forms.Button();
+            this.ReloadButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // GridTabControl
@@ -50,11 +51,22 @@
             this.CRUDButton.UseVisualStyleBackColor = true;
             this.CRUDButton.Click += new System.EventHandler(this.CRUDButton_Click);
             // 
+            // ReloadButton
+            // 
+            this.ReloadButton.Location = new System.Drawing.Point(688, 405);
+            this.ReloadButton.Name = "ReloadButton";
+            this.ReloadButton.Size = new System.Drawing.Size(75, 23);
+            this.ReloadButton.TabIndex = 2;
+            this.ReloadButton.Text = "Reload";
+            this.ReloadButton.UseVisualStyleBackColor = true;
+            this.ReloadButton.Click += new System.EventHandler(this.ReloadButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ReloadButton);
             this.Controls.Add(this.CRUDButton);
             this.Controls.Add(this.GridTabControl);
             this.Name = "Form1";
@@ -67,6 +79,7 @@
 
         private System.Windows.Forms.TabControl GridTabControl;
         private System.Windows.Forms.Button CRUDButton;
+        private System.Windows.Forms.Button ReloadButton;
     }
 }
 
